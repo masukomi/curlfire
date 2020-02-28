@@ -35,7 +35,7 @@ else
     sqlfile="-"     # Will use 'cat' below to read stdin
     fi
 fi
-echo "$sqlfile"
+
 if [ "$sqlfile" != "-" -a ! -r "$sqlfile" ]; then
     echo "Error. File $sqlfile is not readable." >&2
     exit 1
