@@ -64,7 +64,7 @@ extract_cookies() {
     "value"
     "from moz_cookies;"
   )
-  sqlite3 -separator $'\t' "$tmpfile" <<< "${sqlite_query[@]}"
+  sqlite3 -separator $'\t' "$tmpfile" <<<"${sqlite_query[@]}"
 
   cleanup
 
