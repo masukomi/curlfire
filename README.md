@@ -10,7 +10,7 @@ without having to manually deal with the login process.
 
 - `cookiefire` : used to extract cookies from Firefox.
 - `curlfire` : used as `curl` wrapper that use cookies from Firefox.
-- `curlfire-update` : perform _self update_ for `cookiefire`, `curlfire`.
+- `curlfire-install` : perform _self update_ for `cookiefire`, `curlfire`, `curlfire-install`.
 
 # Caveats
 
@@ -49,25 +49,22 @@ curl -b ~/.cache/ff-cookies.txt https://www.google.com
 # Installation
 
 ```bash
-mkdir -p ~/.local/bin
-git clone --depth 1 https://github.com/ccdd13/curlfire
-mv -fv cookiefire ~/.local/bin/cookiefire
-mv -fv curlfire   ~/.local/bin/curlfire
-rm -rf curlfire
-chmod u+x ~/.local/bin/cookiefire ~/.local/bin/curlfire
-echo "${PATH}" | grep -Eq "(^|:)${HOME}/.local/bin(:|)" || echo "PATH=${HOME}/.local/bin:\${PATH}" >> ~/.bashrc
+
+curl -sLO 'https://raw.githubusercontent.com/ccdd13/curlfire/main/curlfire-install' | bash -x
+
+# # same as Below
+# mkdir       -p        "${HOME}/.local/bin" "${HOME}/.cache"
+# git   clone --depth 1 https://github.com/ccdd13/curlfire          "${HOME}/.cache/curlfire"
+# mv          -fv       "${HOME}/.cache/curlfire/cookiefire"        "${HOME}/.local/bin/cookiefire"
+# mv          -fv       "${HOME}/.cache/curlfire/curlfire"          "${HOME}/.local/bin/curlfire"
+# mv          -fv       "${HOME}/.cache/curlfire/curlfire-install"  "${HOME}/.local/bin/curlfire-install"
+# chmod u+x             "${HOME}/.local/bin/*"
+# rm          -rf       "${HOME}/.cache/curlfire"
+# echo "${PATH}" | grep -Eq "(^|:)${HOME}/.local/bin(:|)" || echo "PATH=${HOME}/.local/bin:\${PATH}" >> "${HOME}/.bashrc"
+
 ```
 
-**OR**
-
-```bash
-mkdir -p ~/.local/bin
-git clone --depth 1 https://github.com/ccdd13/curlfire ${HOME}/.local/curlfire
-chmod u+x ${HOME}/.local/curlfire/cookiefire ${HOME}/.local/curlfire/curlfire ${HOME}/.local/curlfire/curlfire-update
-echo "${PATH}" | grep -Eq "(^|:)${HOME}/.local/curlfire(:|)" || echo "PATH=${HOME}/.local/curlfire:\${PATH}" >> ~/.bashrc
-```
-
-**to run `${HOME}/.local/curlfire/curlfire-update`**
+**to update run `${HOME}/.local/curlfire/curlfire-install`**
 
 # Complementary projects (and shameless advertising)
 
