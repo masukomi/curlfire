@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 # -*- mode:sh -*-
 
+# @author  Mohamed Amin Boubaker https://github.com/ccdd13
+# @author  https://github.com/joelebeau
+# @author  https://github.com/talwrii
+# @license MIT
+
 die() {
   echo >&2 "$*"
   exit 1

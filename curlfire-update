@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-dir="$(realpath $(dirname ${0}))"
-oldpwd="$(pwd)"
-cd "${dir}"
-git reset --hard
-git fetch --prune --all && git pull && git status && git gc --aggressive --prune
-cd "${oldpwd}"
