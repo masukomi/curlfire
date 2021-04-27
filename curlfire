@@ -18,11 +18,12 @@ for var in "$@"; do
         args+=("$var")
       else
         profile=$var
-      fi;
+      fi
       skip=
-  ;; esac;
+      ;;
+  esac
 done
 
 curlcookies="$(mktemp /tmp/curlcookies.XXXXXXXXXX)"
-cookiefire "$profile" > "$curlcookies"
-curl -b "$curlcookies" "${args[@]}" ;
+cookiefire "$profile" >"$curlcookies"
+curl -b "$curlcookies" "${args[@]}"
