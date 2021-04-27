@@ -59,7 +59,7 @@ curl -sLO 'https://raw.githubusercontent.com/ccdd13/curlfire/main/curlfire-insta
 # mv          -fv       "${HOME}/.cache/curlfire/cookiefire"        "${HOME}/.local/bin/cookiefire"
 # mv          -fv       "${HOME}/.cache/curlfire/curlfire"          "${HOME}/.local/bin/curlfire"
 # mv          -fv       "${HOME}/.cache/curlfire/curlfire-install"  "${HOME}/.local/bin/curlfire-install"
-# chmod u+x             "${HOME}/.local/bin/*"
+# chmod u+x             "${HOME}/.local/bin/"*
 # rm          -rf       "${HOME}/.cache/curlfire"
 # echo "${PATH}" | grep -Eq "(^|:)${HOME}/.local/bin(:|)" || echo "PATH=${HOME}/.local/bin:\${PATH}" >> "${HOME}/.bashrc"
 
