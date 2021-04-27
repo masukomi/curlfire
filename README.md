@@ -1,4 +1,5 @@
 # curlfire
+
 Run curl with the current [Firefox](https://www.mozilla.org/en-US/firefox/) cookies.
 This is useful for interacting with logged in websites from the shell, without having to manually deal with the login process.
 
@@ -7,33 +8,39 @@ The executable `cookiefire` included in this package can be used to extract the 
 This is achieved by reading the **cookies.sqlite** file in Firefox profiles.
 
 # Attribution
+
 This code is adapted from [this Stack Exchange answer](https://superuser.com/a/1239036/653515) by [hackerb9](https://superuser.com/users/400780/hackerb9).
 
 # Usage
-```
+
+```bash
 # Fetch google with the cookies from the default profile
-curlfire http://www.google.com/
+curlfire https://www.google.com
 
 # Fetch google with the cookies from the blah profile
-curlfire -P blah http://www.google.com/
+curlfire -P blah https://www.google.com
 
 # Getting cookies
-cookiefire > /tmp/cookies
-curl -b /tmp/cookies http://www.google.com/
+cookiefire > ~/.cache/ff-cookies.txt
+curl -b ~/.cache/ff-cookies.txt https://www.google.com
 ```
 
 # Caveats
-* **Does not work with session cookies**[(1)](https://support.mozilla.org/en-US/questions/899388
-) (you may be able to work around this by setting "Remember me" for the website with which you are using your tool)
+* **Does not work with session cookies**[(1)](https://support.mozilla.org/en-US/questions/899388) (you may be able to work around this by setting "Remember me" for the website with which you are using your tool)
 * Only tested on linux machines
 * Unlikely to work with windows
 * Will probably work on macs since [a7a7bc7](https://github.com/ccdd13/curlfire/commit/a7a7bc72b5673369f55396e7db12bff4b8675f36) but untested (feedback welcome)
 
 # Installation
-```
-cd ~
-git clone https://github.com/talwrii/curlfire
-echo 'PATH=$PATH:~/curlfire' >> ~/.bashrc
+
+```bash
+mkdir -p ~/.local/bin
+git clone --depth 1 https://github.com/talwrii/curlfire
+mv -fv cookiefire ~/.local/bin/cookiefire
+mv -fv curlfire   ~/.local/bin/curlfire
+rm -rf curlfire
+chmod u+x ~/.local/bin/cookiefire ~/.local/bin/curlfire
+echo "${PATH}" | grep -Eq "(^|:)${HOME}/.local/bin(:|)" || echo "PATH=${HOME}/.local/bin:\${PATH}" >> ~/.bashrc
 ```
 
 # Alternatives and prior work
