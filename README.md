@@ -27,7 +27,7 @@ curl -b /tmp/cookies http://www.google.com/
 ) (you may be able to work around this by setting "Remember me" for the website with which you are using your tool)
 * Only tested on linux machines
 * Unlikely to work with windows
-* Will probably work on macs but untested (feedback welcome)
+* Will probably work on macs since [a7a7bc7](https://github.com/ccdd13/curlfire/commit/a7a7bc72b5673369f55396e7db12bff4b8675f36) but untested (feedback welcome)
 
 # Installation
 ```
