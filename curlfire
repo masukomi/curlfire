@@ -24,6 +24,7 @@ for var in "$@"; do
   esac
 done
 
-curlcookies="$(mktemp /tmp/curlcookies.XXXXXXXXXX)"
+mkdir -p "$HOME"/.cache
+curlcookies="$(mktemp "$HOME"/.cache/curlcookies.XXXXXXXXXX)"
 cookiefire "$profile" >"$curlcookies"
 curl -b "$curlcookies" "${args[@]}"
