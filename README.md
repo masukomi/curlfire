@@ -45,7 +45,7 @@ curl -b ~/.cache/ff-cookies.txt https://www.google.com
 
 ```bash
 mkdir -p ~/.local/bin
-git clone --depth 1 https://github.com/talwrii/curlfire
+git clone --depth 1 https://github.com/ccdd13/curlfire
 mv -fv cookiefire ~/.local/bin/cookiefire
 mv -fv curlfire   ~/.local/bin/curlfire
 rm -rf curlfire
@@ -55,7 +55,7 @@ echo "${PATH}" | grep -Eq "(^|:)${HOME}/.local/bin(:|)" || echo "PATH=${HOME}/.l
 
 ```bash
 mkdir -p ~/.local/bin
-git clone --depth 1 https://github.com/talwrii/curlfire ${HOME}/.local/curlfire
+git clone --depth 1 https://github.com/ccdd13/curlfire ${HOME}/.local/curlfire
 chmod u+x ${HOME}/.local/curlfire/cookiefire ${HOME}/.local/curlfire/curlfire ${HOME}/.local/curlfire/curlfire-update
 echo "${PATH}" | grep -Eq "(^|:)${HOME}/.local/curlfire(:|)" || echo "PATH=${HOME}/.local/curlfire:\${PATH}" >> ~/.bashrc
 ```
