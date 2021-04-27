@@ -53,6 +53,13 @@ chmod u+x ~/.local/bin/cookiefire ~/.local/bin/curlfire
 echo "${PATH}" | grep -Eq "(^|:)${HOME}/.local/bin(:|)" || echo "PATH=${HOME}/.local/bin:\${PATH}" >> ~/.bashrc
 ```
 
+```bash
+mkdir -p ~/.local/bin
+git clone --depth 1 https://github.com/talwrii/curlfire ${HOME}/.local/curlfire
+chmod u+x ${HOME}/.local/curlfire/cookiefire ${HOME}/.local/curlfire/curlfire ${HOME}/.local/curlfire/curlfire-update
+echo "${PATH}" | grep -Eq "(^|:)${HOME}/.local/curlfire(:|)" || echo "PATH=${HOME}/.local/curlfire:\${PATH}" >> ~/.bashrc
+```
+
 # Alternatives and prior work
 
 - Adapted from
