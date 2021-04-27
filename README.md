@@ -92,6 +92,7 @@ Users of this project might also be interested in:
 
 # Copyright
 
-This code is distributed under [an MIT license](LICENSE.txt).<br/>
-It contains code adapted from a code snippet in the aforementioned Stack Exchange<br/>
-answer which is also distributed under [an MIT license](SNIPPET-LICENSE.txt) as [stipulated by the Stack Exchange terms and conditions](https://meta.stackexchange.com/questions/272956/a-new-code-license-the-mit-this-time-with-attribution-required).
+This code is distributed under [an MIT license](LICENSE.txt).<br/> It contains
+code adapted from a code snippet in the aforementioned Stack Exchange<br/>
+answer which is also distributed under [an MIT license](SNIPPET-LICENSE.txt) as
+[stipulated by the Stack Exchange terms and conditions](https://meta.stackexchange.com/questions/272956/a-new-code-license-the-mit-this-time-with-attribution-required).
