@@ -10,7 +10,8 @@ without having to manually deal with the login process.
 
 - `cookiefire` : used to extract cookies from Firefox.
 - `curlfire` : used as `curl` wrapper that use cookies from Firefox.
-- `curlfire-install` : perform _self update_ for `cookiefire`, `curlfire`, `curlfire-install`.
+- `curlfire-install` : perform _self update_ for `cookiefire`, `curlfire`,
+  `curlfire-install`.
 
 # Caveats
 
