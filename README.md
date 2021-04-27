@@ -51,7 +51,7 @@ curl -b ~/.cache/ff-cookies.txt https://www.google.com
 
 ```bash
 
-curl -sLO 'https://raw.githubusercontent.com/ccdd13/curlfire/main/curlfire-install' | bash -x
+curl -sL 'https://raw.githubusercontent.com/ccdd13/curlfire/main/curlfire-install' | bash -x
 
 # # same as Below
 # mkdir       -p        "${HOME}/.local/bin" "${HOME}/.cache"
