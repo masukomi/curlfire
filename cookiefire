@@ -64,8 +64,9 @@ EOF
 
 }
 
-tmpfile="$(mktemp /tmp/cookies.sqlite.XXXXXXXXXX)"
-[ -z "$curlcookies" ] && curlcookies="$(mktemp /tmp/curlcookies.XXXXXXXXXX)"
+mkdir -p ${HOME}/.cache
+tmpfile="$(mktemp ${HOME}/.cache/cookies.sqlite.XXXXXXXXXX)"
+[ -z "$curlcookies" ] && curlcookies="$(mktemp ${HOME}/.cache/curlcookies.XXXXXXXXXX)"
 [ -d "$HOME/Library/Application Support/Firefox/Profiles" ] &&
   cookies_sqlite_path="$HOME/Library/Application Support/Firefox/Profiles/"*".$profile/cookies.sqlite" ||
   cookies_sqlite_path="$HOME/.mozilla/firefox/"*".$profile/cookies.sqlite"
