@@ -1,4 +1,5 @@
-This copyright notice applies only to the code snippets contained here https://superuser.com/a/1239036/653515, adapted for use in this project
+This copyright notice applies only to the code snippets contained
+here https://superuser.com/a/1239036/653515, adapted for use in this project
 
 Copyright 2017 Hackerb9 (https://superuser.com/users/400780/hackerb9)
 
