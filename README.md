@@ -4,20 +4,20 @@ Run curl with the current [Firefox](https://www.mozilla.org/en-US/firefox/)
 cookies. This is useful for interacting with logged in websites from the shell,
 without having to manually deal with the login process.
 
->This is achieved by reading the **cookies.sqlite** file in Firefox profiles.
+> This is achieved by reading the **cookies.sqlite** file in Firefox profiles.
 
 # Executable included in this package :
 
-- `cookiefire`      : used to extract cookies from Firefox.
-- `curlfire`        : used as `curl` wrapper that use cookies from Firefox.
-- `curlfire-update` : perform *self update* for `cookiefire`, `curlfire`.
+- `cookiefire` : used to extract cookies from Firefox.
+- `curlfire` : used as `curl` wrapper that use cookies from Firefox.
+- `curlfire-update` : perform _self update_ for `cookiefire`, `curlfire`.
 
 # Caveats
 
 - **Does not work with session cookies**
-  [(1)](https://support.mozilla.org/en-US/questions/899388) (you may be
-  able to work around this by setting "Remember me" for the website with which
-  you are using your tool)
+  [(1)](https://support.mozilla.org/en-US/questions/899388) (you may be able to
+  work around this by setting "Remember me" for the website with which you are
+  using your tool)
 - Only tested on linux machines
 - Unlikely to work with windows
 - Will probably work on macs since
@@ -57,7 +57,9 @@ rm -rf curlfire
 chmod u+x ~/.local/bin/cookiefire ~/.local/bin/curlfire
 echo "${PATH}" | grep -Eq "(^|:)${HOME}/.local/bin(:|)" || echo "PATH=${HOME}/.local/bin:\${PATH}" >> ~/.bashrc
 ```
+
 **OR**
+
 ```bash
 mkdir -p ~/.local/bin
 git clone --depth 1 https://github.com/ccdd13/curlfire ${HOME}/.local/curlfire
@@ -92,9 +94,9 @@ All of these approaches can be time consuming when automating tasks.
 [Prior to Firefox 57](https://support.mozilla.org/en-US/kb/frequently-asked-questions-firefox-addon),
 the
 [remote control extension (archived)](https://web.archive.org/web/20181017212317/https://addons.mozilla.org/en-US/firefox/addon/remote-control/)
- [(github)](https://github.com/FF-Remote-Control/FF-Remote-Control)
- could be used to interact with the page currently viewed in Firefox from the
-shell (including outputting the current
+[(github)](https://github.com/FF-Remote-Control/FF-Remote-Control) could be used
+to interact with the page currently viewed in Firefox from the shell (including
+outputting the current
 [document object model](https://en.wikipedia.org/wiki/Document_Object_Model) as
 HTML).
 
