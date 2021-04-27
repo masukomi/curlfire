@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # -*- mode:sh -*-
 
 die() {
@@ -48,16 +48,16 @@ extract_cookies() {
 
   echo "# Netscape HTTP Cookie File"
   sqlite3 -separator $'\t' "$tmpfile" <<-EOF
-.mode tabs
-.header off
-select host,
-case substr(host,1,1)='.' when 0 then 'FALSE' else 'TRUE' end,
-path,
-case isSecure when 0 then 'FALSE' else 'TRUE' end,
-expiry,
-name,
-value
-from moz_cookies;
+    .mode tabs
+    .header off
+    select host,
+    case substr(host,1,1)='.' when 0 then 'FALSE' else 'TRUE' end,
+    path,
+    case isSecure when 0 then 'FALSE' else 'TRUE' end,
+    expiry,
+    name,
+    value
+    from moz_cookies;
 EOF
 
   cleanup
@@ -65,7 +65,7 @@ EOF
 }
 
 tmpfile="$(mktemp /tmp/cookies.sqlite.XXXXXXXXXX)"
-curlcookies="$(mktemp /tmp/curlcookies.XXXXXXXXXX)"
+[ -z "$curlcookies" ] && curlcookies="$(mktemp /tmp/curlcookies.XXXXXXXXXX)"
 [ -d "$HOME/Library/Application Support/Firefox/Profiles" ] &&
   cookies_sqlite_path="$HOME/Library/Application Support/Firefox/Profiles/"*".$profile/cookies.sqlite" ||
   cookies_sqlite_path="$HOME/.mozilla/firefox/"*".$profile/cookies.sqlite"
