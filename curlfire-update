@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# @author  Mohamed Amin Boubaker https://github.com/ccdd13/curlfire
+# @author  Mohamed Amin Boubaker https://github.com/ccdd13
 # @license MIT
 
 dir="$(realpath $(dirname ${0}))"
