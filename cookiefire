@@ -37,8 +37,7 @@ extract_cookies() {
   fi
 
   if [ "$sqlfile" != "-" ] && [ ! -r "$sqlfile" ]; then
-    echo "Error. File $sqlfile is not readable." >&2
-    exit 1
+    die "Error. File $sqlfile is not readable."
   fi
 
   # We have to copy cookies.sqlite, because FireFox has a lock on it
