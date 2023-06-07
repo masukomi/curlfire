@@ -19,7 +19,7 @@ trap cleanup EXIT INT QUIT TERM
 # Run older ld (pseudo condition)
 
 if [ "$#" == "0" ]; then
-  profile=default
+  profile=default-release
 elif [ "$#" == "1" ]; then
   profile=$1
 else
