@@ -40,7 +40,7 @@ extract_cookies() {
     fi
   fi
 
-  if [ "$sqlfile" != "-" -a ! -r "$sqlfile" ]; then
+  if [ "$sqlfile" != "-" ] && [ ! -r "$sqlfile" ]; then
     echo "Error. File $sqlfile is not readable." >&2
     exit 1
   fi
