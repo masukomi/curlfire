@@ -81,6 +81,6 @@ tmpfile="$(mktemp "$HOME"/.cache/cookies.sqlite.XXXXXXXXXX)"
   # shellcheck disable=SC2086
   echo $cookies_sqlite_path
 ) | {
-  read cookie_file
+  read -r cookie_file
   extract_cookies "$cookie_file"
 }
