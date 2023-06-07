@@ -17,9 +17,9 @@ test-cookiefire:
 
 .PHONY: test-curlfire
 test-curlfire:
-	@[[ "$$(HOME=test/home/linux PATH="test/bin:.:$$PATH" ./curlfire)" \
+	@[[ "$$(HOME=test/home/linux PATH="test/bin:$$PATH" ./curlfire)" \
 		=~ ^test/bin/curl\ -b\ test/home/linux/\.cache/curlcookies\..*\ -h$$ ]] && echo no args: ok
-	@[[ "$$(HOME=test/home/linux PATH="test/bin:.:$$PATH" ./curlfire http://example.com)" \
+	@[[ "$$(HOME=test/home/linux PATH="test/bin:$$PATH" ./curlfire http://example.com)" \
 		=~ ^test/bin/curl\ -b\ test/home/linux/\.cache/curlcookies\..*\ http://example.com$$ ]] && echo args: ok
 	@[ -z "$$(find test/home -type f | grep .cache)" ] && echo cleanup: ok
 

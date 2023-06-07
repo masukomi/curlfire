@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# Mock script to test the command line arguments passed to the script
+
+echo "$0" "$@"
