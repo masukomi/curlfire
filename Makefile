@@ -2,7 +2,7 @@ SHELL := /usr/bin/env bash
 
 .PHONY: test
 test: ## Run tests
-test: test-cookiefire test-curlfire
+test: test-cookiefire test-curlfire test-integration
 
 .PHONY: test-cookiefire
 test-cookiefire:
@@ -22,6 +22,12 @@ test-curlfire:
 	@[[ "$$(HOME=test/home/linux PATH="test/bin:$$PATH" ./curlfire http://example.com)" \
 		=~ ^test/bin/curl\ -b\ test/home/linux/\.cache/curlcookies\..*\ http://example.com$$ ]] && echo args: ok
 	@[ -z "$$(find test/home -type f | grep .cache)" ] && echo cleanup: ok
+
+.PHONY: test-integration
+test-integration:
+	@python3 -m http.server 8080 &>/dev/null & trap "kill %1" EXIT; sleep 0.1 && \
+		HOME=test/home/linux PATH=".:$$PATH" ./curlfire -v http://localhost:8080/ 2>&1 \
+		| grep -q "> Cookie: foo=bar" && echo integration: ok
 
 .PHONY: help
 help: ## Show this help text

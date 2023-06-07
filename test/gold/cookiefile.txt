@@ -1,3 +1,4 @@
 # Netscape HTTP Cookie File
 www.mozilla.org	FALSE	/	FALSE	1686230186	firefox-sticky-promo	true
 www.mozilla.org	FALSE	/	FALSE	1686147425	fxa-product-referral-id	navigation
+localhost	FALSE	/	FALSE	2147483647	foo	bar
