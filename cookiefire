@@ -74,9 +74,13 @@ mkdir -p "$HOME"/.cache
 tmpfile="$(mktemp "$HOME"/.cache/cookies.sqlite.XXXXXXXXXX)"
 [ -z "$curlcookies" ] && curlcookies="$(mktemp "$HOME"/.cache/curlcookies.XXXXXXXXXX)"
 [ -d "$HOME/Library/Application Support/Firefox/Profiles" ] &&
-  cookies_sqlite_path="$HOME/Library/Application Support/Firefox/Profiles/"*".$profile/cookies.sqlite" ||
-  cookies_sqlite_path="$HOME/.mozilla/firefox/"*".$profile/cookies.sqlite"
-echo "$cookies_sqlite_path" | {
+  cookies_sqlite_path="$HOME/Library/Application Support/Firefox/Profiles/*.$profile/cookies.sqlite" ||
+  cookies_sqlite_path="$HOME/.mozilla/firefox/*.$profile/cookies.sqlite"
+(
+  IFS=
+  # shellcheck disable=SC2086
+  echo $cookies_sqlite_path
+) | {
   read cookie_file
   extract_cookies "$cookie_file"
 }
