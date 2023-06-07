@@ -49,7 +49,6 @@ extract_cookies() {
 
   echo "# Netscape HTTP Cookie File"
   sqlite_query=(
-    ".header off"
     "select host,"
     "case substr(host,1,1)='.' when 0 then 'FALSE' else 'TRUE' end,"
     "path,"
@@ -59,7 +58,7 @@ extract_cookies() {
     "value"
     "from moz_cookies;"
   )
-  sqlite3 -separator $'\t' "$tmpfile" <<<"${sqlite_query[@]}"
+  sqlite3 -noheader -separator $'\t' "$tmpfile" <<<"${sqlite_query[@]}"
 
   cleanup
 
