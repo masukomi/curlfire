@@ -32,10 +32,6 @@ extract_cookies() {
     sqlfile="$1"
   else
     if tty -s; then
-      sqlfile=$(ls -t "$HOME/.mozilla/firefox/"*"/cookies.sqlite" | head -1)
-      [ -d "$HOME/Library/Application Support/Firefox/Profiles" ] &&
-        sqlfile="$(ls -t "$HOME/Library/Application Support/Firefox/Profiles/"*"/cookies.sqlite" | head -1)"
-
       sqlfile="-" # Will use 'cat' below to read stdin
     fi
   fi
