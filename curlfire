@@ -8,6 +8,11 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
+cleanup() {
+  rm -f "$curlcookies"
+}
+trap cleanup EXIT INT QUIT TERM
+
 profile=default-release
 skip=
 args=()
