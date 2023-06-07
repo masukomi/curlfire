@@ -27,14 +27,7 @@ else
 fi
 
 extract_cookies() {
-
-  if [ "$#" -ge 1 ]; then
-    sqlfile="$1"
-  else
-    if tty -s; then
-      sqlfile="-" # Will use 'cat' below to read stdin
-    fi
-  fi
+  sqlfile="$1"
 
   if [ "$sqlfile" != "-" ] && [ ! -r "$sqlfile" ]; then
     die "Error. File $sqlfile is not readable."
@@ -65,14 +58,17 @@ extract_cookies() {
 
 mkdir -p "$HOME"/.cache
 tmpfile="$(mktemp "$HOME"/.cache/cookies.sqlite.XXXXXXXXXX)"
-[ -d "$HOME/Library/Application Support/Firefox/Profiles" ] &&
-  cookies_sqlite_path="$HOME/Library/Application Support/Firefox/Profiles/*.$profile/cookies.sqlite" ||
+
+if [ ! -t 0 ]; then
+  cookies_sqlite_path=-
+elif [ -d "$HOME/Library/Application Support/Firefox/Profiles" ]; then
+  cookies_sqlite_path="$HOME/Library/Application Support/Firefox/Profiles/*.$profile/cookies.sqlite"
+else
   cookies_sqlite_path="$HOME/.mozilla/firefox/*.$profile/cookies.sqlite"
-(
+fi
+
+extract_cookies "$(
   IFS=
   # shellcheck disable=SC2086
   echo $cookies_sqlite_path
-) | {
-  read -r cookie_file
-  extract_cookies "$cookie_file"
-}
+)"
