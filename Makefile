@@ -2,7 +2,14 @@ SHELL := /usr/bin/env bash
 
 .PHONY: test
 test: ## Run tests
-test: test-cookiefire test-curlfire test-integration
+test: check-deps test-cookiefire test-curlfire test-integration
+
+check_dep = $(if $(shell command -v $(1)),,$(error $(1) not found))
+deps := sqlite3 curl python3
+
+.PHONY: check-deps
+check-deps:
+	$(foreach _,$(deps),$(call check_dep,$(_)))
 
 .PHONY: test-cookiefire
 test-cookiefire:
