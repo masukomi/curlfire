@@ -49,7 +49,6 @@ extract_cookies() {
 
   echo "# Netscape HTTP Cookie File"
   sqlite_query=(
-    ".mode tabs"
     ".header off"
     "select host,"
     "case substr(host,1,1)='.' when 0 then 'FALSE' else 'TRUE' end,"
