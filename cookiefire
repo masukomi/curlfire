@@ -51,22 +51,18 @@ extract_cookies() {
     from moz_cookies;
 EOF
   cleanup
-
 }
 
-mkdir -p "$HOME"/.cache
-tmpfile="$(mktemp "$HOME"/.cache/cookies.sqlite.XXXXXXXXXX)"
+get_sqlite_path() {
+  if [ ! -t 0 ]; then
+    echo -
+  elif [ -d "$HOME/Library/Application Support/Firefox/Profiles" ]; then
+    echo "$HOME/Library/Application Support/Firefox/Profiles/"*".$profile/cookies.sqlite"
+  else
+    echo "$HOME/.mozilla/firefox/"*".$profile/cookies.sqlite"
+  fi
+}
 
-if [ ! -t 0 ]; then
-  cookies_sqlite_path=-
-elif [ -d "$HOME/Library/Application Support/Firefox/Profiles" ]; then
-  cookies_sqlite_path="$HOME/Library/Application Support/Firefox/Profiles/*.$profile/cookies.sqlite"
-else
-  cookies_sqlite_path="$HOME/.mozilla/firefox/*.$profile/cookies.sqlite"
-fi
-
-extract_cookies "$(
-  IFS=
-  # shellcheck disable=SC2086
-  echo $cookies_sqlite_path
-)"
+mkdir -p "$HOME/.cache"
+tmpfile="$(mktemp "$HOME/.cache/cookies.sqlite.XXXXXXXXXX")"
+extract_cookies "$(get_sqlite_path)"
