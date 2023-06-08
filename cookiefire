@@ -19,7 +19,7 @@ trap cleanup EXIT INT QUIT TERM
 # Run older ld (pseudo condition)
 
 if [ "$#" == "0" ]; then
-  profile=default
+  profile=default-release
 elif [ "$#" == "1" ]; then
   profile=$1
 else
@@ -27,56 +27,42 @@ else
 fi
 
 extract_cookies() {
+  sqlfile="$1"
 
-  if [ "$#" -ge 1 ]; then
-    sqlfile="$1"
-  else
-    if tty -s; then
-      sqlfile=$(ls -t "$HOME/.mozilla/firefox/"*"/cookies.sqlite" | head -1)
-      [ -d "$HOME/Library/Application Support/Firefox/Profiles" ] &&
-        sqlfile="$(ls -t "$HOME/Library/Application Support/Firefox/Profiles/"*"/cookies.sqlite" | head -1)"
-
-      sqlfile="-" # Will use 'cat' below to read stdin
-    fi
-  fi
-
-  if [ "$sqlfile" != "-" -a ! -r "$sqlfile" ]; then
-    echo "Error. File $sqlfile is not readable." >&2
-    exit 1
+  if [ "$sqlfile" != "-" ] && [ ! -r "$sqlfile" ]; then
+    die "Error. File $sqlfile is not readable."
   fi
 
   # We have to copy cookies.sqlite, because FireFox has a lock on it
-  cat "$sqlfile" >>"$tmpfile"
+  cat "$sqlfile" >"$tmpfile"
 
   # This is the format of the sqlite database:
   # CREATE TABLE moz_cookies (id INTEGER PRIMARY KEY, name TEXT, value TEXT, host TEXT, path TEXT,expiry INTEGER, lastAccessed INTEGER, isSecure INTEGER, isHttpOnly INTEGER);
 
   echo "# Netscape HTTP Cookie File"
-  sqlite_query=(
-    ".mode tabs"
-    ".header off"
-    "select host,"
-    "case substr(host,1,1)='.' when 0 then 'FALSE' else 'TRUE' end,"
-    "path,"
-    "case isSecure when 0 then 'FALSE' else 'TRUE' end,"
-    "expiry,"
-    "name,"
-    "value"
-    "from moz_cookies;"
-  )
-  sqlite3 -separator $'\t' "$tmpfile" <<<"${sqlite_query[@]}"
-
+  sqlite3 -noheader -separator $'\t' "$tmpfile" <<EOF
+    select host,
+    case substr(host,1,1)='.' when 0 then 'FALSE' else 'TRUE' end,
+    path,
+    case isSecure when 0 then 'FALSE' else 'TRUE' end,
+    expiry,
+    name,
+    value
+    from moz_cookies;
+EOF
   cleanup
-
 }
 
-mkdir -p "$HOME"/.cache
-tmpfile="$(mktemp "$HOME"/.cache/cookies.sqlite.XXXXXXXXXX)"
-[ -z "$curlcookies" ] && curlcookies="$(mktemp "$HOME"/.cache/curlcookies.XXXXXXXXXX)"
-[ -d "$HOME/Library/Application Support/Firefox/Profiles" ] &&
-  cookies_sqlite_path="$HOME/Library/Application Support/Firefox/Profiles/"*".$profile/cookies.sqlite" ||
-  cookies_sqlite_path="$HOME/.mozilla/firefox/"*".$profile/cookies.sqlite"
-echo "$cookies_sqlite_path" | {
-  read cookie_file
-  extract_cookies "$cookie_file"
+get_sqlite_path() {
+  if [ ! -t 0 ]; then
+    echo -
+  elif [ -d "$HOME/Library/Application Support/Firefox/Profiles" ]; then
+    echo "$HOME/Library/Application Support/Firefox/Profiles/"*".$profile/cookies.sqlite"
+  else
+    echo "$HOME/.mozilla/firefox/"*".$profile/cookies.sqlite"
+  fi
 }
+
+mkdir -p "$HOME/.cache"
+tmpfile="$(mktemp "$HOME/.cache/cookies.sqlite.XXXXXXXXXX")"
+extract_cookies "$(get_sqlite_path)"

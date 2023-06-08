@@ -8,7 +8,12 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-profile=default
+cleanup() {
+  rm -f "$curlcookies"
+}
+trap cleanup EXIT INT QUIT TERM
+
+profile=default-release
 skip=
 args=()
 for var in "$@"; do
@@ -31,4 +36,4 @@ done
 mkdir -p "$HOME"/.cache
 curlcookies="$(mktemp "$HOME"/.cache/curlcookies.XXXXXXXXXX)"
 cookiefire "$profile" >"$curlcookies"
-curl -b "$curlcookies" "${args[@]}"
+curl -b "$curlcookies" "${args[@]:--h}"
